@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>WebGL 3D Model Viewer Using three.js</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="classes/threejs/three.js"></script>
+    <script src="classes/threejs/Detector.js"></script>
+    <script src="classes/threejs/OrbitControls.js"></script>
+	<script src="classes/threejs/ColladaLoader.js"></script>
+	<script src="classes/rossi/RossiWeb3D.js"></script>
+
+    <style>
+        body {
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            background: hsl(0, 0%, 50%);
+        }
+    </style>
+
+</head>
+<body>
+    <center>
+		<table width="600px" cellpadding="0" cellspacing="0" style="border: 1px solid white;">
+			<tr>
+				<td width="600px" id="3dtd">
+				</td>
+			</tr>
+			<tr>
+				<td width="600px">
+					<img src="ux-images/wire-shade-bar.gif" usemap="#wire-shade">
+					<map name="wire-shade">
+						<area title="Shaded model" alt="Shaded image" shape="rect" coords="237,0,296,48" style="outline:none;" target="_self" onclick="switchWireframe('N')" />
+						<area title="Wireframe model" alt="Wireframe model" shape="rect" coords="303,0,362,48" style="outline:none;" target="_self" onclick="switchWireframe('Y')" />
+					</map>
+				</td>
+			</tr>
+		</table>
+	</center>
+	<script>
+
+        if (!Detector.webgl) {
+            Detector.addGetWebGLMessage();
+        }
+		if (init()) {
+			initRossi3DScene();
+			loadModel();	
+			animate();
+		}
+	</script>
+</body>
+</html>
