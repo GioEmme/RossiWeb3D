@@ -53,20 +53,21 @@ var sceneCanvasHeight = 600;
 var canvasContainer = '3dtd';
 
 /* Setting proprietà camera */
-var cameraFOV = 45;
+var cameraFOV = 30;
 var cameraAspectRatio = sceneCanvasWidth / sceneCanvasHeight;
 var cameraNearestPoint = 1;
 var cameraFarestPoint = 3000;
-var cameraPositionX = -300;
+var cameraPositionX = -200;
 var cameraPositionY = -300;
 var cameraPositionZ = 100;
+var cameraLookAtElev = 0;
 
 /* Setting luci */
 var ambientLightColor = 0xdfebff;
 var ambientLightIntensity = 0.2;
 
 var keyLightColor = 0xdfebff;
-var keyLightIntensity = 0.6;
+var keyLightIntensity = 0.8;
 var keyLightPositionX = -200;
 var keyLightPositionY = -100;
 var keyLightPositionZ = 100;
@@ -84,7 +85,7 @@ var backLightPositionY = 400;
 var backLightPositionZ = 0;
 
 /* Setting proprietà piano di riferimento */
-var planeColor = 0x333333;
+var planeColor = 0xffffff;
 var planeWidth = 200;
 var planeHeight = 200;
 var planeDepth = 10;
@@ -129,6 +130,12 @@ function init() {
 
 				modelPath = x[0].getElementsByTagName("modelPath")[0].childNodes[0].nodeValue;
 				
+				cameraFOV = x[0].getElementsByTagName("camera")[0].getElementsByTagName("fov")[0].childNodes[0].nodeValue;
+				cameraPositionX = x[0].getElementsByTagName("camera")[0].getElementsByTagName("posX")[0].childNodes[0].nodeValue;
+				cameraPositionY = x[0].getElementsByTagName("camera")[0].getElementsByTagName("posY")[0].childNodes[0].nodeValue;
+				cameraPositionZ = x[0].getElementsByTagName("camera")[0].getElementsByTagName("posZ")[0].childNodes[0].nodeValue;
+				cameraLookAtElev = x[0].getElementsByTagName("camera")[0].getElementsByTagName("lookAtElev")[0].childNodes[0].nodeValue;
+
 				riduttorePositionX = x[0].getElementsByTagName("riduttore")[0].getElementsByTagName("posX")[0].childNodes[0].nodeValue;
 				riduttorePositionY = x[0].getElementsByTagName("riduttore")[0].getElementsByTagName("posY")[0].childNodes[0].nodeValue;
 				riduttorePositionZ = x[0].getElementsByTagName("riduttore")[0].getElementsByTagName("posZ")[0].childNodes[0].nodeValue;
@@ -227,7 +234,7 @@ function initRossi3DScene() {
 	planeMaterialArray.push( new THREE.MeshPhongMaterial( { color: planeColor } ) );
 	planeMaterialArray.push( new THREE.MeshPhongMaterial( { color: planeColor } ) );
 	planeMaterialArray.push( new THREE.MeshPhongMaterial( { color: planeColor } ) );
-	planeMaterialArray.push( new THREE.MeshPhongMaterial( { color: planeColor, map: THREE.ImageUtils.loadTexture('textures/rossi-logo.png'), emissive: 0x666666, emissiveIntensity: 0.2 } ) );
+	planeMaterialArray.push( new THREE.MeshPhongMaterial( { color: planeColor, map: THREE.ImageUtils.loadTexture('textures/rossi-logo.jpg'), emissive: 0xffffff, emissiveIntensity: 0.1 } ) );
 	planeMaterialArray.push( new THREE.MeshPhongMaterial( { color: planeColor } ) );
 	var planeMaterials = new THREE.MeshFaceMaterial( planeMaterialArray );
 	var planeGeometry = new THREE.CubeGeometry( planeWidth, planeHeight, planeDepth, 1, 1, 1 );
@@ -254,6 +261,9 @@ function initRossi3DScene() {
 	controls.enableDamping = true;
 	controls.dampingFactor = 0.25;
 	controls.enableZoom = true;
+	controls.target.set( 0, 0, parseFloat(cameraLookAtElev) );
+	controls.update();
+	camera.updateProjectionMatrix();
 }
 
 function loadModel() {

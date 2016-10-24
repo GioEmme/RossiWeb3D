@@ -2,10 +2,17 @@
 	<modelPath>
 		./assets/GMRC2I140nolights.dae
 	</modelPath>
+	<camera>
+		<fov>30</fov>
+		<posX>-300</posX>
+		<posY>-300</posY>
+		<posZ>80</posZ>
+		<lookAtElev>70</lookAtElev>
+	</camera>
 	<riduttore>
-		<posX>-20</posX>
-		<posY>35</posY>
-		<posZ>0</posZ>
+		<posX>0</posX>
+		<posY>0</posY>
+		<posZ>20</posZ>
 		<rotX>0</rotX>
 		<rotY>1.57</rotY>
 		<rotZ>0</rotZ>
@@ -13,9 +20,9 @@
 	<sensoMotore>
 		<orientation>h</orientation>
 		<direction>left</direction>
-		<posX>-20</posX>
-		<posY>35</posY>
-		<posZ>150</posZ>
+		<posX>0</posX>
+		<posY>0</posY>
+		<posZ>170</posZ>
 		<rotX>-1.57</rotX>
 		<rotY>0</rotY>
 		<rotZ>0</rotZ>
@@ -23,9 +30,9 @@
 	<sensoAlbLento>
 		<orientation>v</orientation>
 		<direction>left</direction>
-		<posX>-20</posX>
-		<posY>5</posY>
-		<posZ>0</posZ>
+		<posX>0</posX>
+		<posY>-30</posY>
+		<posZ>20</posZ>
 		<rotX>0</rotX>
 		<rotY>0</rotY>
 		<rotZ>0</rotZ>
